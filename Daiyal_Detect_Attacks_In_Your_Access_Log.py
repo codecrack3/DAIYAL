@@ -3,7 +3,7 @@ __author__ = 'jb93lee'
 
 log_file_name = 'access_log' # 로그 파일명을 입력합니다. 해당 로그는 동일 폴더 내에 존재해야 합니다.
 index = 'IIS2' # 로그 파일 포맷에 맞는 인덱스 값을 적어줍니다.
-suspect_ip = 'input suspect_ip in here' # 따로 출력하고 싶은 IP가 있다면 여기에 입력합니다.
+suspect_ip = 'input suspect_ip in here' # 따로 추출하고 싶은 IP가 있다면 여기에 입력합니다.
 ignore_word = ['select_arrange','another_string'] # 무시하고 싶은 문자열이 있다면 리스트에 추가해줍니다.
 
 # 로그 파일 포맷이 맞지 않는다면 새로 생성하셔야 합니다. 대부분의 로그 포맷은 아래 중 하나입니다.
