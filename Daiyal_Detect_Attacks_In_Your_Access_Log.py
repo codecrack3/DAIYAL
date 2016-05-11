@@ -9,15 +9,15 @@ ignore_word = ['select_arrange','another_string'] # 무시하고 싶은 문자�
 # 로그 파일 포맷이 맞지 않는다면 새로 생성하셔야 합니다. 대부분의 로그 포맷은 아래 중 하나입니다.
 if index == 'IIS1':
     http_method = -2
-    request_code = -5
+    status_code = -5
     url = -1
 elif index == 'IIS2':
     http_method = 5
-    request_code = 8
+    status_code = 8
     url = 6
 elif index == 'Apache':
     http_method = 4
-    request_code = -3
+    status_code = -3
     url = 5
 
 # 로그파일들은 아래와 같이 분류되어 저장됩니다.
@@ -41,16 +41,16 @@ for line in open(log_file_name, 'rb'):
         file1.write(line)
     if 'POST' in fields[http_method].upper():
         file2.write(line)
-    if 'EDIT' in fields[request_code].upper(): # Edit File
+    if 'EDIT' in fields[status_code].upper(): # Edit File
         file1.write(line)
-    if '404' in fields[request_code].upper():
+    if '404' in fields[status_code].upper():
         file1.write(line)
     elif 'PUT' in fields[http_method].upper(): # Upload File
         file2.write(line)
     elif 'DELETE' in fields[http_method].upper(): # Delete File
         file2.write(line)
     elif 'HEAD' in fields[http_method].upper(): # Scan Success
-        if '20' in fields[request_code]:
+        if '20' in fields[status_code]:
             file2.write(line)
     elif 'SHELL' in fields[url].upper(): # WebShell Upload
         file2.write(line)
