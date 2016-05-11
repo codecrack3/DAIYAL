@@ -41,16 +41,18 @@ for line in open(log_file_name, 'rb'):
         file1.write(line)
     if 'POST' in fields[http_method].upper():
         file2.write(line)
+    if 'EDIT' in fields[request_code].upper(): # Edit File
+        file1.write(line)
     if '404' in fields[request_code].upper():
         file1.write(line)
     elif 'PUT' in fields[http_method].upper(): # Upload File
         file2.write(line)
     elif 'DELETE' in fields[http_method].upper(): # Delete File
         file2.write(line)
-    elif 'HEAD' in fields[http_method].upper(): # Scan success
+    elif 'HEAD' in fields[http_method].upper(): # Scan Success
         if '20' in fields[request_code]:
             file2.write(line)
-    elif 'SHELL' in fields[url].upper(): # File/WebShell Upload
+    elif 'SHELL' in fields[url].upper(): # WebShell Upload
         file2.write(line)
     elif 'CMD' in fields[url].upper():
         file2.write(line)
@@ -62,11 +64,19 @@ for line in open(log_file_name, 'rb'):
         file2.write(line)
     elif '..' in fields[url]: # Directory Listing, File Download
         file2.write(line)
-    elif 'select' in fields[url]: # SQL Injection
+    elif 'SELECT' in fields[url].upper(): # SQL Injection
         file2.write(line)
-    elif 'union' in fields[url]:
+    elif 'UNION' in fields[url].upper():
         file2.write(line)
-    elif 'http://' in fields[url].upper(): # RFI, XSS, Redirect
+    elif 'HTTP://' in fields[url].upper(): # RFI, XSS, Redirect
+        file2.write(line)
+    elif 'PASSWD' in fields[url].upper():
+        file2.write(line)
+    elif 'DOCUMENT.' in fields[url].upper(): # XSS
+        file2.write(line)
+    elif 'CMD=' in fields[url].upper(): # Command Injection
+        file2.write(line)
+    elif 'WGET%20' in fields[url].upper(): # Download
         file2.write(line)
     else:
         pass
